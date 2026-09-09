@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GFOOD Água Proteína</title>
+<meta name="description" content="25g de proteína da carne, em água. Sem açúcar, sem gás, 355ml. A evolução da água.">
+<meta name="theme-color" content="#04070f">
+<meta property="og:title" content="GFOOD Água Proteína. A evolução da água.">
+<meta property="og:description" content="25g de proteína da carne, em água. Sem açúcar. Sem gás.">
+<meta property="og:image" content="https://leobontorin.github.io/gfood-site/assets/abacaxi.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="fetch" href="assets/hero.mp4" crossorigin>
+<style>
+:root{
+  --bg:#04070f;--bg2:#070c1a;--ink:#f2f5fb;--ink2:#b9c3d6;--mute:#6f7b94;
+  --blue:#1f5eff;--blue2:#5b8cff;--line:rgba(255,255,255,.09);
+  --r:24px;--nav:68px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto;background:var(--bg)}
+html.lenis{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.display{font-family:'Sora',sans-serif;letter-spacing:-.035em;line-height:.98}
+.wrap{max-width:1400px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+.mute{color:var(--mute)}
+
+/* grain (fixed, cheap) */
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ===== preloader ===== */
+#pre{position:fixed;inset:0;z-index:100;background:#f4f6fb;color:#04070f;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,4vw,56px)}
+#pre .top{display:flex;justify-content:space-between;font-family:'Sora';font-weight:600;letter-spacing:.14em;font-size:.8rem}
+#pre .num{font-family:'Sora';font-weight:300;font-size:clamp(5rem,18vw,16rem);letter-spacing:-.05em;line-height:.85}
+#pre .bar{height:2px;background:rgba(4,7,15,.12);position:relative;overflow:hidden}
+#pre .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),#8fb0ff);transform-origin:left;transform:scaleX(0)}
+
+/* ===== nav ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,56px);opacity:0;transform:translateY(-10px)}
+nav .logo{display:flex;align-items:center;gap:.6rem;font-family:'Sora';font-weight:700;letter-spacing:.1em;font-size:1.05rem}
+nav .logo b{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:.9rem}
+nav .pill{display:flex;gap:.2rem;padding:.35rem;border-radius:999px;background:rgba(10,14,28,.55);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%)}
+nav .pill a{padding:.5rem .95rem;border-radius:999px;font-size:.82rem;font-weight:600;color:var(--ink2);transition:.25s var(--ease)}
+nav .pill a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.35rem;border-radius:999px;font-weight:700;font-size:.85rem;letter-spacing:.01em;border:1px solid transparent;transition:transform .25s var(--ease),background .25s,border-color .25s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-w{background:var(--ink);color:var(--bg)}
+.btn-w:hover{background:#fff}
+.btn-b{background:var(--blue);color:#fff}
+.btn-b:hover{background:var(--blue2)}
+.btn-g{background:rgba(255,255,255,.06);color:var(--ink);border-color:var(--line);backdrop-filter:blur(12px)}
+.btn-g:hover{background:rgba(255,255,255,.12)}
+nav .cta{display:flex;gap:.5rem}
+@media(max-width:900px){nav .pill{display:none}}
+
+/* ===== hero (shrinks into card) ===== */
+#hero{position:relative;height:100dvh;min-height:100dvh}
+#hero .frame{position:sticky;top:0;height:100dvh;overflow:hidden;border-radius:0;will-change:transform,border-radius}
+#hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,7,15,.82) 0%,rgba(4,7,15,.45) 42%,rgba(4,7,15,.05) 70%),linear-gradient(to top,rgba(4,7,15,.9),transparent 38%)}
+#hero .copy{position:absolute;left:0;right:0;bottom:clamp(40px,8vh,96px);padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end}
+#hero h1{font-size:clamp(3rem,7.4vw,7.6rem);font-weight:600}
+#hero h1 em{font-style:normal;color:var(--blue2)}
+#hero p{font-size:clamp(1rem,1.25vw,1.2rem);color:var(--ink2);max-width:40ch;margin:1.2rem 0 1.6rem}
+#hero .r{justify-self:end;text-align:right;display:flex;flex-direction:column;gap:1rem;align-items:flex-end}
+#hero .r .stat{font-family:'Sora';font-weight:300;font-size:clamp(2.6rem,4vw,4.2rem);letter-spacing:-.04em;line-height:1}
+#hero .r .stat small{display:block;font-family:'Manrope';font-size:.8rem;letter-spacing:.06em;color:var(--mute);font-weight:600;margin-top:.2rem}
+.line{display:inline-block;overflow:hidden;vertical-align:bottom}
+p.line,div.line{display:block}
+.line>span{display:inline-block;transform:translateY(110%)}
+@media(max-width:900px){
+  #hero video{object-position:58% center}
+  #hero .copy{grid-template-columns:1fr;bottom:clamp(28px,6vh,64px)}
+  #hero .r{justify-self:start;text-align:left;align-items:flex-start;flex-direction:row;gap:2rem}
+}
+
+/* ===== scrub (video tied to scroll) ===== */
+#scrub{position:relative;height:420vh}
+#scrub .pin{position:sticky;top:0;height:100dvh;overflow:hidden}
+#scrub video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#scrub .fade{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 100%,rgba(4,7,15,.85),rgba(4,7,15,.15) 55%,transparent)}
+#scrub .cap{position:absolute;left:0;right:0;bottom:12vh;padding:0 clamp(20px,4vw,56px);pointer-events:none}
+#scrub .cap div{position:absolute;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);bottom:0;opacity:0;transform:translateY(24px)}
+#scrub .cap h2{font-size:clamp(2.4rem,6vw,6rem);font-weight:600;max-width:12ch}
+#scrub .cap p{color:var(--ink2);max-width:46ch;margin-top:.9rem;font-size:clamp(1rem,1.2vw,1.15rem)}
+#scrub .prog{position:absolute;top:calc(var(--nav) + 8px);left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);height:1px;background:var(--line)}
+#scrub .prog i{position:absolute;inset:0;background:var(--blue2);transform-origin:left;transform:scaleX(0)}
+
+/* ===== 25G mask ===== */
+#g25{position:relative;height:260vh}
+#g25 .pin{position:sticky;top:0;height:100dvh;overflow:hidden;display:grid;place-items:center}
+#g25 .mask{font-family:'Sora';font-weight:700;font-size:clamp(9rem,36vw,40rem);letter-spacing:-.06em;line-height:.8;
+  background:url(assets/macro.webp) center/cover no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;
+  will-change:transform;transform:scale(1.35)}
+#g25 .sub{position:absolute;bottom:10vh;left:0;right:0;text-align:center;padding:0 clamp(20px,4vw,56px);opacity:0;transform:translateY(20px)}
+#g25 .sub h3{font-size:clamp(1.4rem,2.6vw,2.4rem);font-weight:500;letter-spacing:-.02em}
+#g25 .sub h3 em{font-style:normal;color:var(--blue2)}
+#g25 .sub p{color:var(--ink2);margin-top:.5rem}
+
+/* ===== sabor (fruit parallax) ===== */
+#sabor{position:relative;height:200vh}
+#sabor .pin{position:sticky;top:0;height:100dvh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 clamp(20px,4vw,56px)}
+#sabor .txt h2{font-size:clamp(2.6rem,5.6vw,5.6rem);font-weight:600}
+#sabor .txt h2 em{font-style:normal;color:var(--blue2)}
+#sabor .txt p{color:var(--ink2);max-width:42ch;margin-top:1.2rem;font-size:clamp(1rem,1.2vw,1.15rem)}
+#sabor .chips{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.6rem}
+#sabor .chips span{padding:.55rem .9rem;border:1px solid var(--line);border-radius:999px;font-size:.8rem;font-weight:600;color:var(--ink2);background:rgba(255,255,255,.03)}
+#sabor .stage{position:relative;height:80vh;display:grid;place-items:center}
+#sabor .stage img{position:absolute;will-change:transform;filter:drop-shadow(0 40px 60px rgba(0,0,0,.6))}
+#sabor .can{height:72vh;width:auto;z-index:2}
+#sabor .pa{width:52%;left:-8%;top:2%;z-index:3;transform:translate(-60vw,-30vh) rotate(-30deg)}
+#sabor .pb{width:44%;right:-6%;bottom:4%;z-index:1;transform:translate(60vw,30vh) rotate(25deg)}
+#sabor .ma{width:36%;right:0%;top:0%;z-index:3;transform:translate(50vw,-40vh) rotate(40deg)}
+#sabor .mb{width:30%;left:4%;bottom:6%;z-index:3;transform:translate(-50vw,40vh) rotate(-35deg)}
+#sabor .glow{position:absolute;width:60vmin;height:60vmin;border-radius:50%;background:radial-gradient(circle,rgba(31,94,255,.35),transparent 65%);filter:blur(20px)}
+@media(max-width:900px){#sabor .pin{grid-template-columns:1fr;align-content:end;padding-bottom:6vh}#sabor .stage{height:52vh}#sabor .can{height:50vh}}
+
+/* ===== benefícios: sticky stack ===== */
+#stack{position:relative;padding:12vh 0 0}
+#stack .head{padding:0 clamp(20px,4vw,56px) 6vh}
+#stack .head h2{font-size:clamp(2.4rem,5vw,5rem);font-weight:600;max-width:14ch}
+.card{position:sticky;top:calc(var(--nav) + 12px);height:calc(100dvh - var(--nav) - 24px);margin:0 clamp(12px,2vw,24px) 0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--bg2);display:grid;grid-template-columns:1.05fr .95fr;will-change:transform}
+.card+.card{margin-top:2vh}
+.card .t{padding:clamp(28px,5vw,72px);display:flex;flex-direction:column;justify-content:space-between}
+.card .t h3{font-size:clamp(2rem,4.2vw,4.4rem);font-weight:600;max-width:11ch}
+.card .t p{color:var(--ink2);max-width:40ch;font-size:clamp(1rem,1.2vw,1.15rem)}
+.card .t .k{font-family:'Sora';font-weight:300;font-size:clamp(4rem,9vw,9rem);letter-spacing:-.05em;line-height:.9;color:var(--blue2)}
+.card .v{position:relative;overflow:hidden}
+.card .v img,.card .v video{width:100%;height:100%;object-fit:cover}
+.card .v::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg2),transparent 30%)}
+@media(max-width:900px){.card{grid-template-columns:1fr;grid-template-rows:1fr .9fr}.card .v::after{background:linear-gradient(to bottom,var(--bg2),transparent 30%)}}
+
+/* ===== gallery horizontal ===== */
+#gal{position:relative;overflow:hidden;padding-top:16vh}
+#gal .head{padding:0 clamp(20px,4vw,56px) 5vh;display:flex;justify-content:space-between;align-items:end;gap:2rem}
+#gal .head h2{font-size:clamp(2.2rem,4.6vw,4.6rem);font-weight:600;max-width:12ch}
+#gal .track{display:flex;gap:clamp(12px,1.6vw,24px);padding:0 clamp(20px,4vw,56px) 12vh;will-change:transform}
+#gal .track figure{flex:0 0 clamp(240px,26vw,380px);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:var(--bg2)}
+#gal .track figure.tall{aspect-ratio:4/5}
+#gal .track img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+#gal .track figure:hover img{transform:scale(1.04)}
+
+/* ===== comparação ===== */
+#vs{padding:10vh 0 14vh}
+#vs h2{font-size:clamp(2.2rem,4.6vw,4.6rem);font-weight:600;max-width:14ch;margin-bottom:5vh}
+#vs .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+#vs .col{background:var(--bg);padding:clamp(24px,3.4vw,48px)}
+#vs .col.g{background:linear-gradient(160deg,#0a1a45,#061033)}
+#vs .col h4{font-family:'Sora';font-weight:600;font-size:1.2rem;letter-spacing:-.01em;margin-bottom:1.6rem}
+#vs .col h4 small{display:block;font-family:'Manrope';font-weight:500;color:var(--mute);font-size:.8rem;margin-top:.2rem;letter-spacing:0}
+#vs .row{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.9rem 0;border-top:1px solid var(--line);font-size:.98rem}
+#vs .row b{font-family:'Sora';font-weight:500;color:var(--ink)}
+#vs .col:not(.g) .row b{color:var(--mute)}
+#vs .col.g .row b{color:var(--blue2)}
+@media(max-width:800px){#vs .grid{grid-template-columns:1fr}}
+
+/* ===== revenda ===== */
+#rev{position:relative;padding:8vh 0 16vh}
+#rev .box{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+#rev h2{font-size:clamp(2.4rem,5vw,5.2rem);font-weight:600;max-width:12ch}
+#rev h2 em{font-style:normal;color:var(--blue2)}
+#rev p.lead{color:var(--ink2);max-width:42ch;margin-top:1.2rem;font-size:clamp(1rem,1.2vw,1.15rem)}
+#rev ul{list-style:none;margin-top:1.6rem;display:grid;gap:.6rem}
+#rev li{display:flex;gap:.7rem;align-items:center;color:var(--ink2);font-weight:500}
+#rev li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue2);flex:none}
+form.card-f{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3vw,40px);display:grid;gap:.9rem}
+form.card-f label{display:grid;gap:.4rem;font-size:.78rem;font-weight:700;letter-spacing:.02em;color:var(--ink2)}
+form.card-f input,form.card-f select{width:100%;background:#0b1224;border:1px solid var(--line);border-radius:14px;color:var(--ink);padding:.95rem 1rem;font:inherit;font-size:.95rem;outline:none;transition:border-color .2s}
+form.card-f input:focus,form.card-f select:focus{border-color:var(--blue2)}
+form.card-f input::placeholder{color:#5c6884}
+form.card-f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235c6884' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+form.card-f option{color:#0b1020}
+form.card-f .two{display:grid;grid-template-columns:1fr .6fr;gap:.9rem}
+form.card-f .lgpd{display:flex;gap:.6rem;align-items:flex-start;font-size:.78rem;color:var(--mute);font-weight:500}
+form.card-f .lgpd input{width:auto;margin-top:.2rem}
+form.card-f .msg{font-size:.85rem;font-weight:600;min-height:1.2em;text-align:center}
+form.card-f .msg.ok{color:#5be3a8}form.card-f .msg.err{color:#ff6b7a}
+@media(max-width:900px){#rev .box{grid-template-columns:1fr}form.card-f .two{grid-template-columns:1fr}}
+
+/* ===== footer layered reveal ===== */
+#pinCTA{position:sticky;top:0;height:100dvh;display:grid;place-items:center;text-align:center;padding:0 clamp(20px,4vw,56px);z-index:1}
+#pinCTA h2{font-size:clamp(3rem,9vw,10rem);font-weight:600;letter-spacing:-.045em;line-height:.95}
+#pinCTA h2 em{font-style:normal;color:var(--blue2)}
+#pinCTA .a{margin-top:2rem;display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+footer{position:relative;z-index:2;min-height:100dvh;border-radius:var(--r) var(--r) 0 0;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between}
+footer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+footer .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,7,15,.95) 20%,rgba(4,7,15,.4))}
+footer .in{position:relative;padding:clamp(40px,8vh,96px) clamp(20px,4vw,56px)}
+footer .top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:2rem}
+footer h3{font-family:'Sora';font-weight:600;font-size:1.05rem;margin-bottom:.8rem}
+footer .col a{display:block;color:var(--ink2);padding:.3rem 0;font-weight:500}
+footer .col a:hover{color:var(--ink)}
+footer .big{font-family:'Sora';font-weight:700;font-size:clamp(4rem,16vw,18rem);letter-spacing:-.06em;line-height:.8;color:rgba(255,255,255,.06);position:relative;padding:0 clamp(20px,4vw,56px);user-select:none}
+footer .bottom{position:relative;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.2rem clamp(20px,4vw,56px) calc(1.2rem + env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--mute);font-size:.8rem}
+@media(max-width:900px){footer .top{grid-template-columns:1fr 1fr}}
+
+@media (prefers-reduced-motion:reduce){
+  #pre{display:none}nav{opacity:1;transform:none}
+  .line>span{transform:none}
+  #scrub,#g25,#sabor{height:auto}#scrub .pin,#g25 .pin,#sabor .pin{position:relative;height:auto;min-height:70vh}
+  #scrub .cap div{position:relative;opacity:1;transform:none;margin-top:1rem}
+  #g25 .mask{transform:none}#g25 .sub{opacity:1;transform:none;position:relative;margin-top:2rem}
+  #sabor .stage img{transform:none!important}
+  .card{position:relative;top:auto;height:auto;min-height:70vh}
+  #gal .track{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- PRELOADER -->
+<div id="pre" aria-hidden="true">
+  <div class="top"><span>GFOOD</span><span>ÁGUA PROTEÍNA</span></div>
+  <div class="num"><span id="preN">00</span></div>
+  <div class="bar"><i id="preB"></i></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#hero"><b>G</b>GFOOD</a>
+  <div class="pill">
+    <a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#stack">Benefícios</a><a href="#gal">Campanha</a><a href="#rev">Revenda</a>
+  </div>
+  <div class="cta"><a class="btn btn-w js-buy" href="#">Comprar</a></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="frame" id="heroFrame">
+    <video class="d" autoplay muted loop playsinline preload="auto" poster="assets/abacaxi.webp"><source src="assets/hero.mp4" type="video/mp4"></video>
+    <div class="veil"></div>
+    <div class="copy">
+      <div>
+        <h1 class="display"><span class="line"><span>A evolução</span></span><br><span class="line"><span>da <em>água.</em></span></span></h1>
+        <p class="line"><span>25g de proteína da carne, em água. Sem açúcar. Sem gás. 355ml.</span></p>
+        <div class="line"><span style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn btn-b js-buy" href="#">Comprar agora</a><a class="btn btn-g" href="#rev">Quero revender</a></span></div>
+      </div>
+      <div class="r">
+        <div class="line"><span class="stat">25g<small>proteína da carne</small></span></div>
+        <div class="line"><span class="stat">0<small>açúcar · 0 gás</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRUB -->
+<section id="scrub">
+  <div class="pin">
+    <video id="scrubV" muted playsinline preload="auto"><source src="assets/scrub.mp4" type="video/mp4"></video>
+    <div class="fade"></div>
+    <div class="prog"><i id="scrubP"></i></div>
+    <div class="cap">
+      <div><h2 class="display">Parece água.</h2><p>Leve, gelada, refrescante. Nada de pó, nada de shaker, nada pesando no estômago.</p></div>
+      <div><h2 class="display">Entrega proteína.</h2><p>25 gramas de proteína da carne por lata. A mesma proteína completa, no formato mais leve que existe.</p></div>
+      <div><h2 class="display">Hidrata. Fortalece. Nutre.</h2><p>Vitaminas do complexo B, magnésio e zinco. Tudo em 355ml.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 25G MASK -->
+<section id="g25">
+  <div class="pin">
+    <div class="mask" id="mask">25G</div>
+    <div class="sub" id="g25sub"><h3 class="display">De proteína. <em>Da carne.</em> Em água.</h3><p>A GFOOD fez o que ninguém tinha feito.</p></div>
+  </div>
+</section>
+
+<!-- SABOR -->
+<section id="sabor">
+  <div class="pin">
+    <div class="txt">
+      <h2 class="display">Abacaxi. Hortelã. <em>Frio.</em></h2>
+      <p>Sabor que não parece suplemento. Refrescante por natureza, proteica por evolução.</p>
+      <div class="chips"><span>Sem açúcar</span><span>Sem gás</span><span>Sem lactose</span><span>355ml</span></div>
+    </div>
+    <div class="stage">
+      <div class="glow" aria-hidden="true"></div>
+      <img class="can" src="assets/lata.webp" alt="Lata GFOOD Água Proteína 355ml, sabor abacaxi com hortelã">
+      <img class="pa" src="assets/pineapple.webp" alt="" aria-hidden="true">
+      <img class="pb" src="assets/pineapple.webp" alt="" aria-hidden="true">
+      <img class="ma" src="assets/mint.webp" alt="" aria-hidden="true">
+      <img class="mb" src="assets/mint.webp" alt="" aria-hidden="true">
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="head"><h2 class="display">Feita pra caber no seu dia.</h2></div>
+  <article class="card">
+    <div class="t"><span class="k">01</span><div><h3 class="display">Depois do treino.</h3><p>Abriu, bebeu, recuperou. Sem coqueteleira pra lavar.</p></div></div>
+    <div class="v"><img src="assets/gallery/g11.webp" alt="Atleta segurando GFOOD após o treino" loading="lazy"></div>
+  </article>
+  <article class="card">
+    <div class="t"><span class="k">02</span><div><h3 class="display">No meio do expediente.</h3><p>Discreta, gelada, sem parecer suplemento. Proteína entre uma reunião e outra.</p></div></div>
+    <div class="v"><img src="assets/gallery/g14.webp" alt="GFOOD na mesa de trabalho" loading="lazy"></div>
+  </article>
+  <article class="card">
+    <div class="t"><span class="k">03</span><div><h3 class="display">Onde tem movimento.</h3><p>Corrida, praia, academia, rua. Onde cabe uma água, cabe uma GFOOD.</p></div></div>
+    <div class="v"><img src="assets/gallery/g12.webp" alt="GFOOD em movimento na cidade" loading="lazy"></div>
+  </article>
+</section>
+
+<!-- GALLERY -->
+<section id="gal">
+  <div class="head"><h2 class="display">A campanha.</h2><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">@gfood.br</a></div>
+  <div class="track" id="galTrack">
+    <figure><img src="assets/gallery/g01.webp" alt="Água mudou" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g02.webp" alt="Não é só água" loading="lazy"></figure>
+    <figure class="tall"><img src="assets/gallery/g12.webp" alt="GFOOD" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g03.webp" alt="Proteína da carne em água" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g04.webp" alt="Não é whey" loading="lazy"></figure>
+    <figure class="tall"><img src="assets/gallery/g13.webp" alt="GFOOD" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g06.webp" alt="Seu pós, agora é assim" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g07.webp" alt="Sabor que não parece suplemento" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g08.webp" alt="Treinou, gelou, GFOOD" loading="lazy"></figure>
+    <figure><img src="assets/gallery/g09.webp" alt="Corre, recupera, repete" loading="lazy"></figure>
+    <figure class="tall"><img src="assets/gallery/g14.webp" alt="GFOOD" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- VS -->
+<section id="vs"><div class="wrap">
+  <h2 class="display">Não é whey. É água.</h2>
+  <div class="grid">
+    <div class="col"><h4>Shake de whey<small>o jeito antigo</small></h4>
+      <div class="row"><span>Preparo</span><b>Pó + água + shaker</b></div>
+      <div class="row"><span>Textura</span><b>Cremosa, pesada</b></div>
+      <div class="row"><span>Lactose</span><b>Sim</b></div>
+      <div class="row"><span>Limpeza</span><b>Lavar coqueteleira</b></div>
+      <div class="row"><span>Levar no bolso</span><b>Não</b></div>
+    </div>
+    <div class="col g"><h4>GFOOD Água Proteína<small>o jeito novo</small></h4>
+      <div class="row"><span>Preparo</span><b>Abrir e beber</b></div>
+      <div class="row"><span>Textura</span><b>Água gelada</b></div>
+      <div class="row"><span>Lactose</span><b>Zero</b></div>
+      <div class="row"><span>Limpeza</span><b>Nenhuma</b></div>
+      <div class="row"><span>Levar no bolso</span><b>355ml</b></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- REVENDA -->
+<section id="rev"><div class="wrap"><div class="box">
+  <div>
+    <h2 class="display">Quer GFOOD no seu <em>negócio?</em></h2>
+    <p class="lead">Academias, mercados, farmácias, conveniências e distribuidores. Preencha em 30 segundos e a gente já te chama no WhatsApp com tudo em mãos.</p>
+    <ul><li>Margem forte e produto que gira</li><li>Material de PDV e apoio de marketing</li><li>Atendimento direto, sem intermediário</li></ul>
+  </div>
+  <form class="card-f" id="revForm" novalidate>
+    <label>Seu nome<input name="nome" placeholder="Nome" required></label>
+    <label>Empresa<input name="empresa" placeholder="Nome da empresa" required></label>
+    <label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" placeholder="(41) 9 9999-9999" required></label>
+    <div class="two"><label>Cidade<input name="cidade" placeholder="Cidade" required></label><label>UF<input name="estado" maxlength="2" placeholder="PR" required style="text-transform:uppercase"></label></div>
+    <label>Tipo de negócio<select name="tipo" required><option value="" disabled selected>Selecione</option><option>Academia / Studio</option><option>Loja de suplementos</option><option>Farmácia</option><option>Mercado / Conveniência</option><option>Restaurante / Food service</option><option>Distribuidor / Atacado</option><option>E-commerce</option><option>Outro</option></select></label>
+    <label>Volume inicial estimado<select name="volume" required><option value="" disabled selected>Selecione</option><option>Até 5 caixas / mês</option><option>5 a 20 caixas / mês</option><option>20 a 50 caixas / mês</option><option>50 a 100 caixas / mês</option><option>Mais de 100 caixas / mês</option></select></label>
+    <label class="lgpd"><input type="checkbox" name="consent" required><span>Autorizo o contato da GFOOD e o uso dos meus dados para essa finalidade. <a href="https://gfoodbrasil.com.br/privacidade" target="_blank" rel="noopener" style="text-decoration:underline">Política de privacidade</a>.</span></label>
+    <button class="btn btn-b" type="submit" style="justify-content:center">Quero vender GFOOD</button>
+    <div class="msg" id="revMsg"></div>
+  </form>
+</div></div></section>
+
+<!-- PINNED CTA + FOOTER -->
+<div id="pinCTA">
+  <div>
+    <h2 class="display">Água <em>mudou.</em></h2>
+    <div class="a"><a class="btn btn-b js-buy" href="#">Comprar agora</a><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a></div>
+  </div>
+</div>
+<footer>
+  <video autoplay muted loop playsinline preload="none"><source src="assets/end.mp4" type="video/mp4"></video>
+  <div class="veil"></div>
+  <div class="in"><div class="top">
+    <div><h3>GFOOD Água Proteína</h3><p class="mute" style="max-width:34ch">25g de proteína da carne, em água. Sem açúcar, sem gás, 355ml. Feita no Brasil.</p></div>
+    <div class="col"><h3>Navegar</h3><a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#gal">Campanha</a><a href="#rev">Revenda</a></div>
+    <div class="col"><h3>Falar</h3><a class="js-buy" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="https://gfoodbrasil.com.br/privacidade">Privacidade</a></div>
+  </div></div>
+  <div class="big" aria-hidden="true">GFOOD</div>
+  <div class="bottom"><span>© 2026 GFOOD. Todos os direitos reservados.</span><span>gfoodbrasil.com.br</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+/* ====== CONFIG ====== */
+const WHATSAPP='5541992092626';
+const MSG_COMPRA='Ola! Quero comprar a GFOOD Agua Proteina.';
+const RESELLER_BRIDGE_URL='https://script.google.com/macros/s/AKfycbzWVGCGlNPH36LAl3gd7wUP2DIE2-rhvgqq2Tt-3jmb1hhff1Zdke0_2wmLkPut-GC56g/exec';
+
+gsap.registerPlugin(ScrollTrigger);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile=matchMedia('(max-width: 900px)').matches;
+
+/* smooth scroll (Lenis) */
+let lenis=null;
+if(!reduce){
+  lenis=new Lenis({lerp:.09,smoothWheel:true});
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1&&document.querySelector(id)){e.preventDefault();lenis.scrollTo(id,{offset:-8});}}));
+}
+
+/* buy → WhatsApp */
+document.querySelectorAll('.js-buy').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
+
+/* ====== preloader → hero ====== */
+function introHero(){
+  gsap.to('nav',{opacity:1,y:0,duration:.8,ease:'power3.out',delay:.1});
+  gsap.to('#hero .line>span',{y:0,duration:1.1,ease:'expo.out',stagger:.08,delay:.05});
+}
+if(reduce){document.getElementById('pre').remove();introHero();}
+else{
+  const n=document.getElementById('preN'),b=document.getElementById('preB'),o={v:0};
+  gsap.timeline({onComplete(){gsap.to('#pre',{yPercent:-100,duration:1,ease:'expo.inOut',onComplete(){document.getElementById('pre').remove();}});introHero();}})
+    .to(o,{v:100,duration:1.6,ease:'power2.inOut',onUpdate(){n.textContent=String(Math.round(o.v)).padStart(2,'0');}},0)
+    .to(b,{scaleX:1,duration:1.6,ease:'power2.inOut'},0);
+}
+
+if(!reduce){
+/* ====== hero shrinks into card ====== */
+gsap.to('#heroFrame',{scale:.9,borderRadius:28,ease:'none',
+  scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+gsap.to('#hero .copy',{opacity:0,y:-40,ease:'none',scrollTrigger:{trigger:'#hero',start:'20% top',end:'70% top',scrub:true}});
+
+/* ====== scrub video (Apple-style) ====== */
+const v=document.getElementById('scrubV');
+const prog=document.getElementById('scrubP');
+const caps=document.querySelectorAll('#scrub .cap div');
+let dur=0; v.addEventListener('loadedmetadata',()=>{dur=v.duration;});
+// force browsers to buffer whole file
+v.load(); v.play().then(()=>v.pause()).catch(()=>{});
+ScrollTrigger.create({trigger:'#scrub',start:'top top',end:'bottom bottom',scrub:.6,
+  onUpdate(self){
+    const D=dur||v.duration||0;
+    if(D&&v.readyState>=1){const t=self.progress*D; if(Math.abs(v.currentTime-t)>0.02){v.currentTime=t;}}
+    prog.style.transform=`scaleX(${self.progress})`;
+    // 3 chapters
+    const p=self.progress; const zones=[[.05,.3],[.38,.63],[.7,.95]];
+    caps.forEach((c,i)=>{const [a,b]=zones[i];const on=p>a&&p<b;
+      gsap.to(c,{opacity:on?1:0,y:on?0:24,duration:.5,overwrite:'auto',ease:'power3.out'});});
+  }});
+
+/* ====== 25G mask ====== */
+gsap.timeline({scrollTrigger:{trigger:'#g25',start:'top top',end:'bottom bottom',scrub:true}})
+  .fromTo('#mask',{scale:1.35,backgroundPosition:'50% 40%'},{scale:1,backgroundPosition:'50% 60%',ease:'none'},0)
+  .to('#g25sub',{opacity:1,y:0,ease:'none'},.55);
+
+/* ====== sabor: fruit parallax ====== */
+gsap.timeline({scrollTrigger:{trigger:'#sabor',start:'top top',end:'bottom bottom',scrub:.8}})
+  .to('#sabor .pa',{x:0,y:0,rotate:-12,ease:'power2.out'},0)
+  .to('#sabor .pb',{x:0,y:0,rotate:10,ease:'power2.out'},0)
+  .to('#sabor .ma',{x:0,y:0,rotate:18,ease:'power2.out'},.05)
+  .to('#sabor .mb',{x:0,y:0,rotate:-14,ease:'power2.out'},.05)
+  .fromTo('#sabor .can',{y:60,scale:.94},{y:0,scale:1,ease:'power2.out'},0);
+gsap.from('#sabor .txt > *',{y:30,opacity:0,stagger:.1,duration:1,ease:'expo.out',scrollTrigger:{trigger:'#sabor',start:'top 60%'}});
+
+/* ====== sticky stack ====== */
+const cards=gsap.utils.toArray('.card');
+cards.forEach((card,i)=>{ if(i===cards.length-1)return;
+  gsap.to(card,{scale:.94,opacity:.5,ease:'none',scrollTrigger:{trigger:cards[i+1],start:'top bottom',end:'top top',scrub:true}});});
+gsap.from('#stack .head h2',{y:30,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:'#stack',start:'top 75%'}});
+
+/* ====== horizontal gallery ====== */
+if(!isMobile){
+  const track=document.getElementById('galTrack');
+  const dist=()=>track.scrollWidth-window.innerWidth;
+  gsap.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#gal',start:'top top',end:()=>'+='+dist(),pin:true,scrub:1,invalidateOnRefresh:true}});
+}else{document.getElementById('galTrack').style.overflowX='auto';}
+
+/* ====== reveals ====== */
+gsap.utils.toArray('#vs h2, #vs .col, #rev h2, #rev .lead, #rev ul, #rev form').forEach(el=>{
+  gsap.from(el,{y:28,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 85%'}});});
+/* ====== pinned CTA under footer ====== */
+gsap.to('#pinCTA > div',{scale:.9,opacity:.35,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'top 20%',scrub:true}});
+}
+
+/* ====== form → planilha + WhatsApp ====== */
+const f=document.getElementById('revForm'),m=document.getElementById('revMsg');
+f.addEventListener('submit',async e=>{e.preventDefault();
+  if(!f.checkValidity()){m.className='msg err';m.textContent='Preencha todos os campos e marque o consentimento.';f.reportValidity();return;}
+  const btn=f.querySelector('button');btn.disabled=true;m.className='msg';m.textContent='Enviando…';
+  const d=new FormData(f);
+  const lead={data:new Date().toLocaleString('pt-BR'),nome:d.get('nome'),empresa:d.get('empresa'),whatsapp:d.get('whatsapp'),cidade:d.get('cidade'),estado:(d.get('estado')||'').toUpperCase(),tipo:d.get('tipo'),volume:d.get('volume'),origem:'Site novo gfoodbrasil.com.br'};
+  try{await fetch(RESELLER_BRIDGE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(lead)});}catch(_){}
+  const msg='Ola! Quero ser revendedor(a) da GFOOD Agua Proteina.\n\nEmpresa: '+lead.empresa+'\nNome: '+lead.nome+'\nCidade/UF: '+lead.cidade+'/'+lead.estado+'\nTipo de negocio: '+lead.tipo+'\nVolume estimado: '+lead.volume;
+  m.className='msg ok';m.textContent='Recebemos seu cadastro! Abrindo o WhatsApp…';
+  window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');btn.disabled=false;});
+</script>
+</body>
+</html>
