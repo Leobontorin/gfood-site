@@ -214,6 +214,12 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
   #gal .track{overflow-x:auto}
 }
 </style>
+<!-- Meta Pixel GFOOD -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2610892766085849');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2610892766085849&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -364,7 +370,7 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
     <div class="two"><label>Cidade<input name="cidade" placeholder="Cidade" required></label><label>UF<input name="estado" maxlength="2" placeholder="PR" required style="text-transform:uppercase"></label></div>
     <label>Tipo de negócio<select name="tipo" required><option value="" disabled selected>Selecione</option><option>Academia / Studio</option><option>Loja de suplementos</option><option>Farmácia</option><option>Mercado / Conveniência</option><option>Restaurante / Food service</option><option>Distribuidor / Atacado</option><option>E-commerce</option><option>Outro</option></select></label>
     <label>Volume inicial estimado<select name="volume" required><option value="" disabled selected>Selecione</option><option>Até 5 caixas / mês</option><option>5 a 20 caixas / mês</option><option>20 a 50 caixas / mês</option><option>50 a 100 caixas / mês</option><option>Mais de 100 caixas / mês</option></select></label>
-    <label class="lgpd"><input type="checkbox" name="consent" required><span>Autorizo o contato da GFOOD e o uso dos meus dados para essa finalidade. <a href="https://gfoodbrasil.com.br/privacidade" target="_blank" rel="noopener" style="text-decoration:underline">Política de privacidade</a>.</span></label>
+    <label class="lgpd"><input type="checkbox" name="consent" required><span>Autorizo o contato da GFOOD e o uso dos meus dados para essa finalidade. <a href="/privacidade" target="_blank" rel="noopener" style="text-decoration:underline">Política de privacidade</a>.</span></label>
     <button class="btn btn-b" type="submit" style="justify-content:center">Quero vender GFOOD</button>
     <div class="msg" id="revMsg"></div>
   </form>
@@ -383,7 +389,7 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
   <div class="in"><div class="top">
     <div><h3>GFOOD Água Proteína</h3><p class="mute" style="max-width:34ch">25g de proteína da carne, em água. Sem açúcar, sem gás, 355ml. Feita no Brasil.</p></div>
     <div class="col"><h3>Navegar</h3><a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#gal">Campanha</a><a href="#rev">Revenda</a></div>
-    <div class="col"><h3>Falar</h3><a class="js-wa" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="https://gfoodbrasil.com.br/privacidade">Privacidade</a></div>
+    <div class="col"><h3>Falar</h3><a class="js-wa" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="/privacidade">Privacidade</a></div>
   </div></div>
   <div class="big" aria-hidden="true">GFOOD</div>
   <div class="bottom"><span>© 2026 GFOOD. Todos os direitos reservados.</span><span>gfoodbrasil.com.br</span></div>
@@ -412,7 +418,8 @@ if(!reduce){
 }
 
 /* buy → WhatsApp */
-document.querySelectorAll('.js-wa').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
+document.querySelectorAll('a[href*="gfarma.com"]').forEach(el=>el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout',{content_name:'comprar_gfarma'});}}));
+document.querySelectorAll('.js-wa').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();if(window.fbq)fbq('track','Contact',{content_name:'whatsapp'});window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
 
 /* ====== preloader → hero ====== */
 function introHero(){
@@ -497,6 +504,7 @@ f.addEventListener('submit',async e=>{e.preventDefault();
   try{await fetch(RESELLER_BRIDGE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(lead)});}catch(_){}
   const msg='Ola! Quero ser revendedor(a) da GFOOD Agua Proteina.\n\nEmpresa: '+lead.empresa+'\nNome: '+lead.nome+'\nCidade/UF: '+lead.cidade+'/'+lead.estado+'\nTipo de negocio: '+lead.tipo+'\nVolume estimado: '+lead.volume;
   m.className='msg ok';m.textContent='Recebemos seu cadastro! Abrindo o WhatsApp…';
+  if(window.fbq)fbq('track','Lead',{content_name:'revenda'});
   window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');btn.disabled=false;});
 </script>
 </body>
