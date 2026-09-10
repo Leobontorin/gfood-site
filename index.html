@@ -69,13 +69,14 @@ nav .cta{display:flex;gap:.5rem}
 #hero .copy{position:absolute;left:0;right:0;bottom:clamp(40px,8vh,96px);padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end}
 #hero h1{font-size:clamp(3rem,7.4vw,7.6rem);font-weight:600}
 #hero h1 em{font-style:normal;color:var(--blue2)}
-#hero p{font-size:clamp(1rem,1.25vw,1.2rem);color:var(--ink2);max-width:40ch;margin:1.2rem 0 1.6rem}
+#hero p{font-size:clamp(1rem,1.25vw,1.2rem);color:var(--ink2);max-width:48ch;margin:1.2rem 0 1.6rem}
 #hero .r{justify-self:end;text-align:right;display:flex;flex-direction:column;gap:1rem;align-items:flex-end}
 #hero .r .stat{font-family:'Sora';font-weight:300;font-size:clamp(2.6rem,4vw,4.2rem);letter-spacing:-.04em;line-height:1}
 #hero .r .stat small{display:block;font-family:'Manrope';font-size:.8rem;letter-spacing:.06em;color:var(--mute);font-weight:600;margin-top:.2rem}
-.line{display:inline-block;overflow:hidden;vertical-align:bottom}
+.line{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.14em}
 p.line,div.line{display:block}
-.line>span{display:inline-block;transform:translateY(110%)}
+.line>span{display:inline-block;transform:translateY(115%)}
+#hero h1 .w{display:inline-block;opacity:0;transform:translateY(.55em) rotate(2deg);filter:blur(10px);transform-origin:left bottom}
 @media(max-width:900px){
   #hero video{object-position:58% center}
   #hero .copy{grid-template-columns:1fr;bottom:clamp(28px,6vh,64px)}
@@ -230,7 +231,7 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
   <div class="pill">
     <a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#stack">Benefícios</a><a href="#gal">Campanha</a><a href="#rev">Revenda</a>
   </div>
-  <div class="cta"><a class="btn btn-w js-buy" href="#">Comprar</a></div>
+  <div class="cta"><a class="btn btn-w" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar</a></div>
 </nav>
 
 <!-- HERO -->
@@ -240,9 +241,9 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
     <div class="veil"></div>
     <div class="copy">
       <div>
-        <h1 class="display"><span class="line"><span>A evolução</span></span><br><span class="line"><span>da <em>água.</em></span></span></h1>
-        <p class="line"><span>25g de proteína da carne, em água. Sem açúcar. Sem gás. 355ml.</span></p>
-        <div class="line"><span style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn btn-b js-buy" href="#">Comprar agora</a><a class="btn btn-g" href="#rev">Quero revender</a></span></div>
+        <h1 class="display"><span class="line"><span><span class="w">A</span> <span class="w">evolução</span></span></span><br><span class="line"><span><span class="w">da</span> <em class="w">água.</em></span></span></h1>
+        <p class="line"><span>25g de proteína da carne, em água.<br><span style="white-space:nowrap">Sem açúcar. Sem gás. 355ml.</span></span></p>
+        <div class="line"><span style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="#rev">Quero revender</a></span></div>
       </div>
       <div class="r">
         <div class="line"><span class="stat">25g<small>proteína da carne</small></span></div>
@@ -373,7 +374,7 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
 <div id="pinCTA">
   <div>
     <h2 class="display">Água <em>mudou.</em></h2>
-    <div class="a"><a class="btn btn-b js-buy" href="#">Comprar agora</a><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a></div>
+    <div class="a"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a></div>
   </div>
 </div>
 <footer>
@@ -382,7 +383,7 @@ footer .bottom{position:relative;display:flex;justify-content:space-between;gap:
   <div class="in"><div class="top">
     <div><h3>GFOOD Água Proteína</h3><p class="mute" style="max-width:34ch">25g de proteína da carne, em água. Sem açúcar, sem gás, 355ml. Feita no Brasil.</p></div>
     <div class="col"><h3>Navegar</h3><a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#gal">Campanha</a><a href="#rev">Revenda</a></div>
-    <div class="col"><h3>Falar</h3><a class="js-buy" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="https://gfoodbrasil.com.br/privacidade">Privacidade</a></div>
+    <div class="col"><h3>Falar</h3><a class="js-wa" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="https://gfoodbrasil.com.br/privacidade">Privacidade</a></div>
   </div></div>
   <div class="big" aria-hidden="true">GFOOD</div>
   <div class="bottom"><span>© 2026 GFOOD. Todos os direitos reservados.</span><span>gfoodbrasil.com.br</span></div>
@@ -411,12 +412,14 @@ if(!reduce){
 }
 
 /* buy → WhatsApp */
-document.querySelectorAll('.js-buy').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
+document.querySelectorAll('.js-wa').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
 
 /* ====== preloader → hero ====== */
 function introHero(){
   gsap.to('nav',{opacity:1,y:0,duration:.8,ease:'power3.out',delay:.1});
-  gsap.to('#hero .line>span',{y:0,duration:1.1,ease:'expo.out',stagger:.08,delay:.05});
+  gsap.set('#hero h1 .line>span',{y:0});
+  gsap.to('#hero h1 .w',{opacity:1,y:0,rotate:0,filter:'blur(0px)',duration:1.3,ease:'expo.out',stagger:.14,delay:.25});
+  gsap.to('#hero .line>span:not(h1 .line>span)',{y:0,duration:1.1,ease:'expo.out',stagger:.1,delay:.75});
 }
 if(reduce){document.getElementById('pre').remove();introHero();}
 else{
