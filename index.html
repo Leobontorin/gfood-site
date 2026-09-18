@@ -235,7 +235,7 @@ fbq('init','2610892766085849');fbq('track','PageView');
 <nav>
   <a class="logo" href="#hero"><b>G</b>GFOOD</a>
   <div class="pill">
-    <a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#stack">Benefícios</a><a href="#gal">Campanha</a><a href="/assinatura" style="color:var(--blue2)">Clube</a><a href="#rev">Revenda</a>
+    <a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#stack">Benefícios</a><a href="#gal">Campanha</a><a href="/assinatura" style="color:var(--blue2)">Clube</a><a href="#rev">Revenda</a><a class="js-creator" href="https://vt.tiktok.com/ZSqtSFoqo/?page=TikTokShop" target="_blank" rel="noopener">Creator</a>
   </div>
   <div class="cta"><a class="btn btn-w" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar</a></div>
 </nav>
@@ -249,7 +249,7 @@ fbq('init','2610892766085849');fbq('track','PageView');
       <div>
         <h1 class="display"><span class="line"><span><span class="w">A</span> <span class="w">evolução</span></span></span><br><span class="line"><span><span class="w">da</span> <em class="w">água.</em></span></span></h1>
         <p class="line"><span>25g de proteína da carne, em água.<br><span style="white-space:nowrap">Sem açúcar. Sem gás. 355ml.</span></span></p>
-        <div class="line"><span style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="#rev">Quero revender</a></span></div>
+        <div class="line"><span style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="#rev">Quero revender</a><a class="btn btn-g js-creator" href="https://vt.tiktok.com/ZSqtSFoqo/?page=TikTokShop" target="_blank" rel="noopener">Seja um creator GFOOD</a></span></div>
       </div>
       <div class="r">
         <div class="line"><span class="stat">25g<small>proteína da carne</small></span></div>
@@ -393,7 +393,7 @@ fbq('init','2610892766085849');fbq('track','PageView');
 <div id="pinCTA">
   <div>
     <h2 class="display">Água <em>mudou.</em></h2>
-    <div class="a"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a></div>
+    <div class="a"><a class="btn btn-b" href="https://www.gfarma.com/collections/gfood?utm_source=direto&sck=direto" target="_blank" rel="noopener">Comprar agora</a><a class="btn btn-g" href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a class="btn btn-g js-creator" href="https://vt.tiktok.com/ZSqtSFoqo/?page=TikTokShop" target="_blank" rel="noopener">Seja um creator GFOOD</a></div>
   </div>
 </div>
 <footer>
@@ -402,7 +402,7 @@ fbq('init','2610892766085849');fbq('track','PageView');
   <div class="in"><div class="top">
     <div><h3>GFOOD Água Proteína</h3><p class="mute" style="max-width:34ch">25g de proteína da carne, em água. Sem açúcar, sem gás, 355ml. Feita no Brasil.</p></div>
     <div class="col"><h3>Navegar</h3><a href="#scrub">Proteína</a><a href="#sabor">Sabor</a><a href="#gal">Campanha</a><a href="/assinatura" style="color:var(--blue2)">Clube</a><a href="#rev">Revenda</a></div>
-    <div class="col"><h3>Falar</h3><a class="js-wa" href="#">WhatsApp</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="/privacidade">Privacidade</a></div>
+    <div class="col"><h3>Falar</h3><a class="js-wa" href="#">WhatsApp</a><a class="js-creator" href="https://vt.tiktok.com/ZSqtSFoqo/?page=TikTokShop" target="_blank" rel="noopener">Seja um creator</a><a href="https://instagram.com/gfood.br" target="_blank" rel="noopener">Instagram</a><a href="/privacidade">Privacidade</a></div>
   </div></div>
   <div class="big" aria-hidden="true">GFOOD</div>
   <div class="bottom"><span>© 2026 GFOOD. Todos os direitos reservados.</span><span>gfoodbrasil.com.br</span></div>
@@ -432,6 +432,7 @@ if(!reduce){
 
 /* buy → WhatsApp */
 document.querySelectorAll('a[href*="gfarma.com"]').forEach(el=>el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout',{content_name:'comprar_gfarma'});}}));
+document.querySelectorAll('.js-creator').forEach(el=>el.addEventListener('click',()=>{if(window.fbq)fbq('trackCustom','CreatorClick');}));
 document.querySelectorAll('.js-wa').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();if(window.fbq)fbq('track','Contact',{content_name:'whatsapp'});window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(MSG_COMPRA),'_blank');}));
 
 /* ====== preloader → hero ====== */
