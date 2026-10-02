@@ -45,19 +45,19 @@ nav .r .back{font-size:.82rem;font-weight:600;color:var(--ink2);padding:.5rem .9
 @media(max-width:640px){nav .r .back{display:none}}
 
 /* hero */
-#hero{position:relative;min-height:100dvh;display:grid;align-items:end;overflow:hidden}
+#hero{position:relative;min-height:100dvh;display:grid;align-items:center;overflow:hidden}
 #hero .media{position:absolute;inset:0}
-#hero .media img{width:100%;height:100%;object-fit:cover;object-position:center 40%;transform:scale(1.04);animation:kb 14s ease-out forwards}
+#hero .media video{width:100%;height:100%;object-fit:cover;object-position:60% center}
 @keyframes kb{to{transform:scale(1)}}
 #hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,7,15,.94) 0%,rgba(4,7,15,.72) 40%,rgba(4,7,15,.15) 72%),linear-gradient(to top,rgba(4,7,15,1) 0%,rgba(4,7,15,.35) 40%,transparent 70%)}
-#hero .copy{position:relative;padding:calc(68px + 6vh) 0 8vh;display:grid;grid-template-columns:minmax(0,640px);gap:2rem;align-items:end}
+#hero .copy{position:relative;padding:calc(68px + 4vh) 0 6vh;display:grid;grid-template-columns:minmax(0,640px);gap:2rem;align-items:end}
 #hero h1{font-size:clamp(2.9rem,7vw,7rem)}
 #hero p.lead{font-size:clamp(1.05rem,1.3vw,1.25rem);color:var(--ink2);max-width:46ch;margin:1.3rem 0 1.8rem}
 #hero .acts{display:flex;gap:.6rem;flex-wrap:wrap}
 #hero .stats{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--line)}
 #hero .stat{font-family:'Sora';font-weight:300;font-size:clamp(1.9rem,3vw,3rem);letter-spacing:-.04em;line-height:1;white-space:nowrap}
 #hero .stat small{display:block;font-family:'Manrope';font-size:.78rem;letter-spacing:.06em;color:var(--mute);font-weight:700;margin-top:.25rem;text-transform:uppercase}
-@media(max-width:900px){#hero .media img{object-position:62% center}#hero .stats{gap:1.4rem}#hero .stat{font-size:1.7rem}#hero .stat small{font-size:.66rem}}
+@media(max-width:900px){#hero .media video{object-position:62% center}#hero .stats{gap:1.4rem}#hero .stat{font-size:1.7rem}#hero .stat small{font-size:.66rem}}
 
 /* reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -181,7 +181,7 @@ footer a:hover{color:var(--ink)}
 
 <!-- HERO -->
 <header id="hero">
-  <div class="media"><img src="assets/clube.webp" alt="Caixa do Clube GFOOD com latas de Água Proteína" fetchpriority="high"></div>
+  <div class="media"><video autoplay muted loop playsinline preload="auto" poster="assets/clube.webp" aria-label="Água Proteína GFOOD"><source src="assets/hero.mp4" type="video/mp4"></video></div>
   <div class="veil"></div>
   <div class="wrap copy">
     <div>
@@ -359,8 +359,8 @@ document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>
 
 /* mascaras */
 const wa=m.querySelector('input[name=whatsapp]'),cep=m.querySelector('input[name=cep]');
-wa.addEventListener('input',()=>{let v=wa.value.replace(/\D/g,'').slice(0,11);if(v.length>6)v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;else if(v.length>2)v=`(${v.slice(0,2)}) ${v.slice(2)}`;wa.value=v;});
-cep.addEventListener('input',()=>{let v=cep.value.replace(/\D/g,'').slice(0,8);cep.value=v.length>5?v.slice(0,5)+'-'+v.slice(5):v;});
+wa.addEventListener('input',()=>{const d=wa.value.replace(/\D/g,'').slice(0,11);let v=d;if(d.length>7)v=`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;else if(d.length>2)v=`(${d.slice(0,2)}) ${d.slice(2)}`;else if(d.length>0)v=`(${d}`;wa.value=v;});
+cep.addEventListener('input',()=>{const v=cep.value.replace(/\D/g,'').slice(0,8);cep.value=v.length>5?v.slice(0,5)+'-'+v.slice(5):v;});
 cep.addEventListener('blur',async()=>{const v=cep.value.replace(/\D/g,'');if(v.length!==8)return;try{const j=await (await fetch(`https://viacep.com.br/ws/${v}/json/`)).json();if(!j.erro){m.querySelector('input[name=cidade]').value=`${j.localidade} / ${j.uf}`;}}catch(_){}});
 
 /* submit */
