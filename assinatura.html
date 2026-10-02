@@ -347,15 +347,15 @@ const m=document.getElementById('m'),sel=document.getElementById('mSel'),mPlan=d
 sel.innerHTML=PLANOS.map(p=>`<option value="${p.n}">${p.n} latas</option>`).join('');
 let cur=10;
 function setPlan(n){cur=+n;const p=PLANOS.find(x=>x.n===cur);sel.value=cur;mPlan.textContent=`${p.n} latas / mês · ${R(p.n*p.un)}`;mPrice.textContent=`${R(p.un)} a lata · ${p.frete.toLowerCase()} · -${pct(p.un)}% vs avulso`;}
-function open(n){setPlan(n);m.classList.add('on');document.body.style.overflow='hidden';setTimeout(()=>m.querySelector('input[name=nome]').focus(),80);if(window.fbq)fbq('track','AddToCart',{content_name:'clube_'+cur,value:PLANOS.find(x=>x.n===cur).un*cur,currency:'BRL'});}
-function close(){m.classList.remove('on');document.body.style.overflow='';}
-grid.addEventListener('click',e=>{const c=e.target.closest('.plan');if(c)open(c.dataset.n);});
-grid.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('.plan');if(c){e.preventDefault();open(c.dataset.n);}}});
+function openModal(n){setPlan(n);m.classList.add('on');document.body.style.overflow='hidden';setTimeout(()=>m.querySelector('input[name=nome]').focus(),80);if(window.fbq)fbq('track','AddToCart',{content_name:'clube_'+cur,value:PLANOS.find(x=>x.n===cur).un*cur,currency:'BRL'});}
+function closeModal(){m.classList.remove('on');document.body.style.overflow='';}
+grid.addEventListener('click',e=>{const c=e.target.closest('.plan');if(c)openModal(c.dataset.n);});
+grid.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('.plan');if(c){e.preventDefault();openModal(c.dataset.n);}}});
 sel.addEventListener('change',()=>setPlan(sel.value));
 document.getElementById('mX').addEventListener('click',close);
-m.addEventListener('click',e=>{if(e.target===m)close();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(`.plan[data-n="${a.dataset.go}"]`);el.scrollIntoView({behavior:'smooth',block:'center'});el.style.borderColor='var(--blue2)';setTimeout(()=>open(a.dataset.go),500);}));
+m.addEventListener('click',e=>{if(e.target===m)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(`.plan[data-n="${a.dataset.go}"]`);el.scrollIntoView({behavior:'smooth',block:'center'});el.style.borderColor='var(--blue2)';setTimeout(()=>openModal(a.dataset.go),500);}));
 
 /* mascaras */
 const wa=m.querySelector('input[name=whatsapp]'),cep=m.querySelector('input[name=cep]');
@@ -378,7 +378,7 @@ document.getElementById('mF').addEventListener('submit',async e=>{
   if(link){location.href=link;return;}
   const msg=`Olá! Quero assinar o Clube GFOOD.\nPlano: ${p.n} latas/mês (${total})\nNome: ${d.get('nome')}\nE-mail: ${d.get('email')}\nCEP: ${d.get('cep')} · ${d.get('cidade')}\nPagamento: cartão ou Pix?`;
   window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');
-  btn.disabled=false;btn.textContent='Continuar para o pagamento →';close();
+  btn.disabled=false;btn.textContent='Continuar para o pagamento →';closeModal();
 });
 document.querySelectorAll('.js-wa').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Olá! Tenho uma dúvida sobre o Clube GFOOD (assinatura).'),'_blank');}));
 </script>
